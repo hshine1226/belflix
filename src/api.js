@@ -21,8 +21,9 @@ export const moviesApi = {
   search: (term) =>
     api.get("search/movie", {
       params: {
-        //   사용자가 공백이나 특수문자를 입력할 수도 있으니 encoding 해주어야 한다.
-        query: encodeURIComponent(term),
+        // 사용자가 공백이나 특수문자를 입력할 수도 있으니 encoding 해주어야 한다.
+        // BUT!!!! 기본적으로 axios에서 encoding을 해준다... 따로 encodeURIComponent 사용할 필요 없다.
+        query: term,
       },
     }),
 };
@@ -45,3 +46,5 @@ export const tvApi = {
       },
     }),
 };
+
+//25EA%25B0%2580
