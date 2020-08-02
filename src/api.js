@@ -42,7 +42,7 @@ export const tvApi = {
     api.get("search/tv", {
       params: {
         //   사용자가 공백이나 특수문자를 입력할 수도 있으니 encoding 해주어야 한다.
-        query: encodeURIComponent(term),
+        query: term,
       },
     }),
 };
