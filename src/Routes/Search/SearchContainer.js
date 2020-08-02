@@ -30,6 +30,7 @@ export default class extends React.Component {
 
   searchByTerm = async () => {
     const { searchTerm } = this.state;
+
     this.setState({ loading: true });
     try {
       const {
@@ -49,7 +50,7 @@ export default class extends React.Component {
 
   render() {
     const { error, loading, movieResults, tvResults, searchTerm } = this.state;
-    console.log(this.state);
+
     return (
       <SearchPresenter
         error={error}
