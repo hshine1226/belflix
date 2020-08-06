@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Loader from "../../Components/Loader";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -64,6 +65,27 @@ const OverView = styled.p`
   opacity: 0.7;
   line-height: 1.5;
   width: 50%;
+  margin-bottom: 20px;
+`;
+
+const IMDBButton = styled.button`
+  width: fit-content;
+  height: 30px;
+  color: #000000;
+  background-color: #e2b616;
+  border: none;
+  font-weight: 800;
+  border-radius: 5px;
+`;
+
+const YoutubeButton = styled.button`
+  width: 60px;
+  height: 30px;
+  color: #f8f8f8;
+  background-color: #c71f1e;
+  border: none;
+  font-weight: 800;
+  border-radius: 5px;
 `;
 
 const DetailPresenter = ({ result, error, loading }) =>
@@ -105,6 +127,16 @@ const DetailPresenter = ({ result, error, loading }) =>
             </Item>
           </ItemContainer>
           <OverView>{result.overview}</OverView>
+          {result.imdb_id ? (
+            <IMDBButton>
+              <a
+                href={`https://www.imdb.com/title/${result.imdb_id}`}
+                target="_black"
+              >
+                IMDB
+              </a>
+            </IMDBButton>
+          ) : null}
         </Data>
       </Content>
     </Container>
