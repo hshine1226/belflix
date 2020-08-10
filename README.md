@@ -7,7 +7,6 @@
 - [x] Search
 - [x] Detail
 
-
 ## Code Challenges
 
 - [x] IMDB Link
