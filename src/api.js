@@ -9,9 +9,9 @@ const api = axios.create({
 });
 
 export const moviesApi = {
-  nowPlaying: () => api.get("movie/now_playing"),
-  upcoming: () => api.get("movie/upcoming"),
-  popular: () => api.get("movie/popular"),
+  nowPlaying: (page) => api.get("movie/now_playing", { params: { page } }),
+  upcoming: (page) => api.get("movie/upcoming", { params: { page } }),
+  popular: (page) => api.get("movie/popular", { params: { page } }),
   movieDetail: (id) =>
     api.get(`movie/${id}`, {
       params: {
