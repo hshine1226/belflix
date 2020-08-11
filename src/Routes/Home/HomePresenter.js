@@ -102,9 +102,6 @@ const HomePresenter = ({ nowPlaying, popular, upcoming, error, loading }) => {
   const handleNowPrev = () => {
     if (nowPage > 1) {
       setNowPage(nowPage - 1);
-      moviesApi.nowPlaying(nowPage).then(({ data: { results } }) => {
-        setNowPlayingState(results);
-      });
     }
   };
 
@@ -115,9 +112,6 @@ const HomePresenter = ({ nowPlaying, popular, upcoming, error, loading }) => {
   const handlePopularPrev = () => {
     if (popularPage > 1) {
       setPopularPage(popularPage - 1);
-      moviesApi.popular(popularPage).then(({ data: { results } }) => {
-        setPopularState(results);
-      });
     }
   };
 
@@ -128,9 +122,6 @@ const HomePresenter = ({ nowPlaying, popular, upcoming, error, loading }) => {
   const handleUpcomingPrev = () => {
     if (upcomingPage > 1) {
       setUpcomingPage(upcomingPage - 1);
-      moviesApi.upcoming(upcomingPage).then(({ data: { results } }) => {
-        setUpcomingState(results);
-      });
     }
   };
 
@@ -151,8 +142,12 @@ const HomePresenter = ({ nowPlaying, popular, upcoming, error, loading }) => {
               isMovie={true}
             />
           ))}
-          <ButtonPrev onClick={handleNowPrev}>&#x25B4;</ButtonPrev>
-          <ButtonNext onClick={handleNowNext}>&#x25BE;</ButtonNext>
+          <ButtonPrev onClick={handleNowPrev}>
+            <i className="fas fa-chevron-up"></i>
+          </ButtonPrev>
+          <ButtonNext onClick={handleNowNext}>
+            <i className="fas fa-chevron-down"></i>
+          </ButtonNext>
         </Section>
       ) : null}
       {upcomingState && upcomingState.length > 0 && (
@@ -168,8 +163,12 @@ const HomePresenter = ({ nowPlaying, popular, upcoming, error, loading }) => {
               isMovie={true}
             />
           ))}
-          <ButtonPrev onClick={handleUpcomingPrev}>&#x25B4;</ButtonPrev>
-          <ButtonNext onClick={handleUpcomingNext}>&#x25BE;</ButtonNext>
+          <ButtonPrev onClick={handleUpcomingPrev}>
+            <i className="fas fa-chevron-up"></i>
+          </ButtonPrev>
+          <ButtonNext onClick={handleUpcomingNext}>
+            <i className="fas fa-chevron-down"></i>
+          </ButtonNext>
         </Section>
       )}
       {popularState && popularState.length > 0 && (
@@ -185,8 +184,12 @@ const HomePresenter = ({ nowPlaying, popular, upcoming, error, loading }) => {
               isMovie={true}
             />
           ))}
-          <ButtonPrev onClick={handlePopularPrev}>&#x25B4;</ButtonPrev>
-          <ButtonNext onClick={handlePopularNext}>&#x25BE;</ButtonNext>
+          <ButtonPrev onClick={handlePopularPrev}>
+            <i className="fas fa-chevron-up"></i>
+          </ButtonPrev>
+          <ButtonNext onClick={handlePopularNext}>
+            <i className="fas fa-chevron-down"></i>
+          </ButtonNext>
         </Section>
       )}
       {error && <Message color="#e74c3c" text={error} />}
