@@ -5,6 +5,7 @@ import Loader from "../../Components/Loader";
 
 const DetailPresenter = ({ result, videos, error, loading }) => {
   const [slideIndex, setSlideIndex] = useState(1);
+
   const Container = styled.div`
     height: calc(100vh - 50px);
     width: 100%;
@@ -36,13 +37,21 @@ const DetailPresenter = ({ result, videos, error, loading }) => {
   `;
 
   const Content = styled.div`
-    width: calc(67% - 30px);
-    min-width: 500px;
+    width: calc(67% - 100px);
+    min-width: 600px;
     position: absolute;
-    top: calc(50% - 350px);
+    top: 25px;
     left: 36%;
     right: 0;
-    height: 60%;
+    height: 100%;
+    max-height: 570px;
+
+    @media (max-width: 1200px) {
+      width: 100%;
+      left: 0;
+      padding: 0 45px;
+      min-width: 0;
+    }
   `;
 
   const Data = styled.div`
@@ -51,6 +60,7 @@ const DetailPresenter = ({ result, videos, error, loading }) => {
 
   const Title = styled.h3`
     font-size: 32px;
+    font-weight: 600;
     margin-bottom: 10px;
   `;
 
@@ -62,13 +72,15 @@ const DetailPresenter = ({ result, videos, error, loading }) => {
     margin: 0 10px;
   `;
 
-  const Item = styled.span``;
+  const Item = styled.span`
+    font-weight: 500;
+  `;
 
   const OverView = styled.p`
     font-size: 15px;
     opacity: 0.7;
     line-height: 1.5;
-    width: 60%;
+    width: 100%;
     margin-bottom: 20px;
   `;
 
@@ -83,9 +95,9 @@ const DetailPresenter = ({ result, videos, error, loading }) => {
   `;
 
   const SlideContainer = styled.div`
-    width: 80%;
+    width: 100%;
     height: 100%;
-    position: absolute;
+    position: relative;
     margin: 25px 0;
     overflow-y: hidden;
   `;
@@ -187,6 +199,8 @@ const DetailPresenter = ({ result, videos, error, loading }) => {
             <Item>
               {result.release_date
                 ? result.release_date.substring(0, 4)
+                : result.first_air_date === null
+                ? "개봉일 데이터 없음"
                 : result.first_air_date.substring(0, 4)}
             </Item>
             <Divider>•</Divider>
@@ -215,22 +229,21 @@ const DetailPresenter = ({ result, videos, error, loading }) => {
               </a>
             </IMDBButton>
           ) : null}
-
-          {videos && videos.length > 0 ? (
-            <SlideContainer>
-              {videos.map((video, index, arr) => (
-                <YoutubeVideo
-                  key={video.id}
-                  src={`https://www.youtube.com/embed/${video.key}`}
-                  title={video.name}
-                ></YoutubeVideo>
-              ))}
-              <NumberText>{`${slideIndex}/${videos.length}`}</NumberText>
-              <ButtonPrev onClick={handlePrev}>&#10094;</ButtonPrev>
-              <ButtonNext onClick={handleNext}>&#10095;</ButtonNext>
-            </SlideContainer>
-          ) : null}
         </Data>
+        {videos && videos.length > 0 ? (
+          <SlideContainer>
+            {videos.map((video, index, arr) => (
+              <YoutubeVideo
+                key={video.id}
+                src={`https://www.youtube.com/embed/${video.key}`}
+                title={video.name}
+              ></YoutubeVideo>
+            ))}
+            <NumberText>{`${slideIndex}/${videos.length}`}</NumberText>
+            <ButtonPrev onClick={handlePrev}>&#10094;</ButtonPrev>
+            <ButtonNext onClick={handleNext}>&#10095;</ButtonNext>
+          </SlideContainer>
+        ) : null}
       </Content>
     </Container>
   );
