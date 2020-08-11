@@ -3,159 +3,167 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import Loader from "../../Components/Loader";
 
-const Container = styled.div`
-  height: calc(100vh - 50px);
-  width: 100%;
-  position: relative;
-`;
+const DetailPresenter = ({ result, videos, error, loading }) => {
+  const [slideIndex, setSlideIndex] = useState(1);
+  const Container = styled.div`
+    height: calc(100vh - 50px);
+    width: 100%;
+    position: relative;
+  `;
 
-const Backdrop = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url(${(props) => props.bgImage});
-  background-position: center center;
-  background-size: cover;
-  filter: blur(3px);
-  opacity: 0.5;
-`;
+  const Backdrop = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(${(props) => props.bgImage});
+    background-size: cover;
+    filter: blur(3px);
+    opacity: 0.5;
+  `;
 
-const Cover = styled.div`
-  width: 35%;
-  height: 100%;
-  border-radius: 5px;
-`;
+  const Cover = styled.div`
+    width: 35%;
+    height: 100%;
+    border-radius: 5px;
+  `;
 
-const CoverImage = styled.img`
-  height: 100%;
-  /* position: absolute; */
-  /* -webkit-filter: saturate(116%); */
+  const CoverImage = styled.img`
+    height: 100%;
+    mask-image: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)),
+      linear-gradient(to left top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  `;
 
-  filter: saturate(116%);
+  const Content = styled.div`
+    width: calc(67% - 30px);
+    min-width: 500px;
+    position: absolute;
+    top: calc(50% - 350px);
+    left: 36%;
+    right: 0;
+    height: 60%;
+  `;
 
-  mask-image: linear-gradient(to right top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-  /* linear,
-    right top,
-    left top,
-    color-stop(1, rgba(0, 0, 0, 1)),
-    color-stop(0.5, rgba(0, 0, 0, 1)),
-    color-stop(0, rgba(0, 0, 0, 0))
-  ); */
+  const Data = styled.div`
+    width: 100%;
+  `;
 
-  pointer-events: none;
-  /* transition-property: opacity; */
-  transition-duration: 0.2s;
-  transition-timing-function: ease-in;
-`;
+  const Title = styled.h3`
+    font-size: 32px;
+    margin-bottom: 10px;
+  `;
 
-const Content = styled.div`
-  width: 65%;
-  height: 100%;
-  position: absolute;
-  /* overflow: hidden; */
-  /* top: 0; */
-  right: 0;
-  top: 0;
-  display: flex;
-  justify-content: flex-end;
-`;
+  const ItemContainer = styled.div`
+    margin: 20px 0;
+  `;
 
-const Data = styled.div`
-  width: 100%;
-`;
+  const Divider = styled.span`
+    margin: 0 10px;
+  `;
 
-const Title = styled.h3`
-  font-size: 32px;
-  margin-bottom: 10px;
-`;
+  const Item = styled.span``;
 
-const ItemContainer = styled.div`
-  margin: 20px 0;
-`;
+  const OverView = styled.p`
+    font-size: 15px;
+    opacity: 0.7;
+    line-height: 1.5;
+    width: 60%;
+    margin-bottom: 20px;
+  `;
 
-const Divider = styled.span`
-  margin: 0 10px;
-`;
+  const IMDBButton = styled.button`
+    width: fit-content;
+    height: 30px;
+    color: #000000;
+    background-color: #e2b616;
+    border: none;
+    font-weight: 800;
+    border-radius: 5px;
+  `;
 
-const Item = styled.span``;
+  const SlideContainer = styled.div`
+    width: 80%;
+    height: 100%;
+    position: absolute;
+    margin: 25px 0;
+    overflow-y: hidden;
+  `;
 
-const OverView = styled.p`
-  font-size: 12px;
-  opacity: 0.7;
-  line-height: 1.5;
-  width: 50%;
-  margin-bottom: 20px;
-`;
+  const NumberText = styled.div`
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+  `;
 
-const IMDBButton = styled.button`
-  width: fit-content;
-  height: 30px;
-  color: #000000;
-  background-color: #e2b616;
-  border: none;
-  font-weight: 800;
-  border-radius: 5px;
-`;
+  const ButtonPrev = styled.a`
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+  `;
 
-const SlideContainer = styled.div`
-  max-width: 100%;
-  position: relative;
-  margin: 0;
-  overflow-y: hidden;
-  height: 550px;
-`;
-const YoutubeVideo = styled.iframe`
-  width: 100%;
-  height: 100%;
-`;
-const NumberText = styled.div`
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-`;
-const ButtonPrev = styled.a`
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: auto;
-  padding: 16px;
-  margin-top: -22px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-  }
-`;
-const ButtonNext = styled.a`
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  right: 0;
-  width: auto;
-  padding: 16px;
-  margin-top: -22px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-  border-radius: 3px 0 0 3px;
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-  }
-`;
+  const ButtonNext = styled.a`
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    border-radius: 3px 0 0 3px;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+  `;
 
-const DetailPresenter = ({ result, error, loading }) => {
+  const YoutubeVideo = styled.iframe`
+    width: 100%;
+    height: 100%;
+    display: none;
+    &:nth-child(${slideIndex}) {
+      display: block;
+    }
+  `;
+
+  const handlePrev = () => {
+    if (slideIndex === 1) {
+      setSlideIndex(videos.length);
+    } else {
+      setSlideIndex(slideIndex - 1);
+    }
+    console.log(slideIndex);
+  };
+
+  const handleNext = () => {
+    if (slideIndex === videos.length) {
+      setSlideIndex(1);
+    } else {
+      setSlideIndex(slideIndex + 1);
+    }
+    console.log(slideIndex);
+  };
+
   return loading ? (
     <Loader />
   ) : (
@@ -196,23 +204,6 @@ const DetailPresenter = ({ result, error, loading }) => {
             </Item>
           </ItemContainer>
           <OverView>{result.overview}</OverView>
-
-          {result.videos.results.length > 0 ? (
-            <SlideContainer>
-              {result.videos.results
-                ? result.videos.results.map((result) => (
-                    <YoutubeVideo
-                      key={result.id}
-                      src={`https://www.youtube.com/embed/${result.key}`}
-                      title={result.name}
-                    ></YoutubeVideo>
-                  ))
-                : null}
-              <NumberText>{result.videos.results.length}</NumberText>
-              <ButtonPrev>&#10094;</ButtonPrev>
-              <ButtonNext>&#10095;</ButtonNext>
-            </SlideContainer>
-          ) : null}
           {result.imdb_id ? (
             <IMDBButton>
               <a
@@ -223,6 +214,21 @@ const DetailPresenter = ({ result, error, loading }) => {
                 IMDB
               </a>
             </IMDBButton>
+          ) : null}
+
+          {videos && videos.length > 0 ? (
+            <SlideContainer>
+              {videos.map((video, index, arr) => (
+                <YoutubeVideo
+                  key={video.id}
+                  src={`https://www.youtube.com/embed/${video.key}`}
+                  title={video.name}
+                ></YoutubeVideo>
+              ))}
+              <NumberText>{`${slideIndex}/${videos.length}`}</NumberText>
+              <ButtonPrev onClick={handlePrev}>&#10094;</ButtonPrev>
+              <ButtonNext onClick={handleNext}>&#10095;</ButtonNext>
+            </SlideContainer>
           ) : null}
         </Data>
       </Content>
