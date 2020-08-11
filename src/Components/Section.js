@@ -3,8 +3,9 @@ import Proptypes from "prop-types";
 import styled from "styled-components";
 
 const Container = styled.div`
+  position: relative;
   &:not(:last-child) {
-    margin-bottom: 50px;
+    margin-bottom: 95px;
   }
 `;
 
@@ -14,6 +15,7 @@ const Title = styled.span`
 `;
 
 const Grid = styled.div`
+  position: relative;
   margin-top: 25px;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
@@ -27,12 +29,15 @@ const Grid = styled.div`
     grid-template-columns: repeat(4, 1fr);
   }
 `;
-const Section = ({ title, children }) => (
-  <Container>
-    <Title>{title}</Title>
-    <Grid>{children}</Grid>
-  </Container>
-);
+
+const Section = ({ title, children }) => {
+  return (
+    <Container>
+      <Title>{title}</Title>
+      <Grid>{children}</Grid>
+    </Container>
+  );
+};
 
 Section.propTypes = {
   title: Proptypes.string.isRequired,
