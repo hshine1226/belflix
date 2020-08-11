@@ -4,14 +4,17 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
-  font-size: 12px;
+  height: 100%;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
-const Image = styled.div`
-  background-image: url(${(props) => `${props.bgUrl}`});
-  height: 180px;
-  background-position: center center;
-  background-size: cover;
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
   border-radius: 4px;
   transition: opacity 0.2s linear;
   margin-bottom: 10px;
@@ -28,6 +31,7 @@ const Rating = styled.span`
 const ImageContainer = styled.div`
   margin-bottom: 15px;
   position: relative;
+  height: 100%;
   &:hover {
     ${Image} {
       opacity: 0.3;
@@ -37,6 +41,8 @@ const ImageContainer = styled.div`
     }
   }
 `;
+
+const InformContainer = styled.div``;
 
 const Title = styled.span`
   display: block;
@@ -53,7 +59,7 @@ const Poster = ({ id, imageUrl, title, rating, year, isMovie = false }) => (
     <Container>
       <ImageContainer>
         <Image
-          bgUrl={
+          src={
             imageUrl
               ? `https://image.tmdb.org/t/p/w300${imageUrl}`
               : require("assets/noPosterSmall.jpg")
@@ -67,10 +73,12 @@ const Poster = ({ id, imageUrl, title, rating, year, isMovie = false }) => (
           {rating}/10
         </Rating>
       </ImageContainer>
-      <Title>
-        {title.length > 11 ? `${title.substring(0, 11)}...` : title}
-      </Title>
-      <Year>{year}</Year>
+      <InformContainer>
+        <Title>
+          {title.length > 11 ? `${title.substring(0, 11)}...` : title}
+        </Title>
+        <Year>{year}</Year>
+      </InformContainer>
     </Container>
   </Link>
 );

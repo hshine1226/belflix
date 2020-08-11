@@ -9,15 +9,23 @@ const Container = styled.div`
 `;
 
 const Title = styled.span`
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 700;
 `;
 
 const Grid = styled.div`
   margin-top: 25px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 125px);
+  grid-template-columns: repeat(10, 1fr);
   grid-gap: 20px;
+
+  @media (max-width: 1500px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 `;
 const Section = ({ title, children }) => (
   <Container>
