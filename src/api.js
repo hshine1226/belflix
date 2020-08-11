@@ -26,6 +26,12 @@ export const moviesApi = {
         query: term,
       },
     }),
+  videos: (id) =>
+    api.get(`movie/${id}/videos`, {
+      params: {
+        language: "un-US",
+      },
+    }),
 };
 
 export const tvApi = {
@@ -43,6 +49,12 @@ export const tvApi = {
       params: {
         //   사용자가 공백이나 특수문자를 입력할 수도 있으니 encoding 해주어야 한다.
         query: term,
+      },
+    }),
+  videos: (id) =>
+    api.get(`tv/${id}/videos`, {
+      params: {
+        language: "un-US",
       },
     }),
 };
