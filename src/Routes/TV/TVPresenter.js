@@ -60,27 +60,25 @@ const TVPresenter = ({ topRated, popular, airingToday, error, loading }) => {
   const [airingState, setAiringState] = useState(null);
 
   useEffect(() => {
-    if (topState === null) {
-      setTopState(topRated);
-    }
-  }, [topState, topRated]);
-
-  console.log(topRated, topState);
+    setTopState(topRated);
+    setPopularState(popular);
+    setAiringState(airingToday);
+  }, [topRated, popular, airingToday]);
 
   useEffect(() => {
-    tvApi.topRated(topPage).then(({ data: results }) => {
+    tvApi.topRated(topPage).then(({ data: { results } }) => {
       setTopState(results);
     });
   }, [topPage]);
 
   useEffect(() => {
-    tvApi.popular(popularPage).then(({ data: results }) => {
+    tvApi.popular(popularPage).then(({ data: { results } }) => {
       setPopularState(results);
     });
   }, [popularPage]);
 
   useEffect(() => {
-    tvApi.airingToday(airingPage).then(({ data: results }) => {
+    tvApi.airingToday(airingPage).then(({ data: { results } }) => {
       setAiringState(results);
     });
   }, [airingPage]);
