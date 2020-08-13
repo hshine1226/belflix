@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.js": "/belflix/static/js/main.0427b1a1.chunk.js",
+    "main.js.map": "/belflix/static/js/main.0427b1a1.chunk.js.map",
+    "runtime-main.js": "/belflix/static/js/runtime-main.daeb39da.js",
+    "runtime-main.js.map": "/belflix/static/js/runtime-main.daeb39da.js.map",
+    "static/js/2.22e1ac5a.chunk.js": "/belflix/static/js/2.22e1ac5a.chunk.js",
+    "static/js/2.22e1ac5a.chunk.js.map": "/belflix/static/js/2.22e1ac5a.chunk.js.map",
+    "index.html": "/belflix/index.html",
+    "precache-manifest.98cf3b3d9011689ac106378e63397932.js": "/belflix/precache-manifest.98cf3b3d9011689ac106378e63397932.js",
+    "service-worker.js": "/belflix/service-worker.js",
+    "static/js/2.22e1ac5a.chunk.js.LICENSE.txt": "/belflix/static/js/2.22e1ac5a.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.daeb39da.js",
+    "static/js/2.22e1ac5a.chunk.js",
+    "static/js/main.0427b1a1.chunk.js"
+  ]
+}
