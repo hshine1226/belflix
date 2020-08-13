@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Helmet from "react-helmet";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Section from "Components/Section";
@@ -125,75 +126,88 @@ const HomePresenter = ({ nowPlaying, popular, upcoming, error, loading }) => {
     }
   };
 
-  return loading ? (
-    <Loader />
-  ) : (
-    <Container>
-      {nowPlayingState && nowPlayingState.length > 0 ? (
-        <Section title="Now playing">
-          {nowPlayingState.map((movie) => (
-            <Poster
-              id={movie.id}
-              key={movie.id}
-              title={movie.title}
-              imageUrl={movie.poster_path}
-              rating={movie.vote_average}
-              year={movie.release_date && movie.release_date.substring(0, 4)}
-              isMovie={true}
-            />
-          ))}
-          <ButtonPrev onClick={handleNowPrev}>
-            <i className="fas fa-chevron-up"></i>
-          </ButtonPrev>
-          <ButtonNext onClick={handleNowNext}>
-            <i className="fas fa-chevron-down"></i>
-          </ButtonNext>
-        </Section>
-      ) : null}
-      {upcomingState && upcomingState.length > 0 && (
-        <Section title="Upcoming Movies">
-          {upcomingState.map((movie) => (
-            <Poster
-              id={movie.id}
-              key={movie.id}
-              title={movie.title}
-              imageUrl={movie.poster_path}
-              rating={movie.vote_average}
-              year={movie.release_date && movie.release_date.substring(0, 4)}
-              isMovie={true}
-            />
-          ))}
-          <ButtonPrev onClick={handleUpcomingPrev}>
-            <i className="fas fa-chevron-up"></i>
-          </ButtonPrev>
-          <ButtonNext onClick={handleUpcomingNext}>
-            <i className="fas fa-chevron-down"></i>
-          </ButtonNext>
-        </Section>
+  return (
+    <>
+      <Helmet>
+        <title>Home | Belflix</title>
+      </Helmet>
+      {loading ? (
+        <Loader />
+      ) : (
+        <Container>
+          {nowPlayingState && nowPlayingState.length > 0 ? (
+            <Section title="Now playing">
+              {nowPlayingState.map((movie) => (
+                <Poster
+                  id={movie.id}
+                  key={movie.id}
+                  title={movie.title}
+                  imageUrl={movie.poster_path}
+                  rating={movie.vote_average}
+                  year={
+                    movie.release_date && movie.release_date.substring(0, 4)
+                  }
+                  isMovie={true}
+                />
+              ))}
+              <ButtonPrev onClick={handleNowPrev}>
+                <i className="fas fa-chevron-up"></i>
+              </ButtonPrev>
+              <ButtonNext onClick={handleNowNext}>
+                <i className="fas fa-chevron-down"></i>
+              </ButtonNext>
+            </Section>
+          ) : null}
+          {upcomingState && upcomingState.length > 0 && (
+            <Section title="Upcoming Movies">
+              {upcomingState.map((movie) => (
+                <Poster
+                  id={movie.id}
+                  key={movie.id}
+                  title={movie.title}
+                  imageUrl={movie.poster_path}
+                  rating={movie.vote_average}
+                  year={
+                    movie.release_date && movie.release_date.substring(0, 4)
+                  }
+                  isMovie={true}
+                />
+              ))}
+              <ButtonPrev onClick={handleUpcomingPrev}>
+                <i className="fas fa-chevron-up"></i>
+              </ButtonPrev>
+              <ButtonNext onClick={handleUpcomingNext}>
+                <i className="fas fa-chevron-down"></i>
+              </ButtonNext>
+            </Section>
+          )}
+          {popularState && popularState.length > 0 && (
+            <Section title="Popular Movies">
+              {popularState.map((movie) => (
+                <Poster
+                  id={movie.id}
+                  key={movie.id}
+                  title={movie.title}
+                  imageUrl={movie.poster_path}
+                  rating={movie.vote_average}
+                  year={
+                    movie.release_date && movie.release_date.substring(0, 4)
+                  }
+                  isMovie={true}
+                />
+              ))}
+              <ButtonPrev onClick={handlePopularPrev}>
+                <i className="fas fa-chevron-up"></i>
+              </ButtonPrev>
+              <ButtonNext onClick={handlePopularNext}>
+                <i className="fas fa-chevron-down"></i>
+              </ButtonNext>
+            </Section>
+          )}
+          {error && <Message color="#e74c3c" text={error} />}
+        </Container>
       )}
-      {popularState && popularState.length > 0 && (
-        <Section title="Popular Movies">
-          {popularState.map((movie) => (
-            <Poster
-              id={movie.id}
-              key={movie.id}
-              title={movie.title}
-              imageUrl={movie.poster_path}
-              rating={movie.vote_average}
-              year={movie.release_date && movie.release_date.substring(0, 4)}
-              isMovie={true}
-            />
-          ))}
-          <ButtonPrev onClick={handlePopularPrev}>
-            <i className="fas fa-chevron-up"></i>
-          </ButtonPrev>
-          <ButtonNext onClick={handlePopularNext}>
-            <i className="fas fa-chevron-down"></i>
-          </ButtonNext>
-        </Section>
-      )}
-      {error && <Message color="#e74c3c" text={error} />}
-    </Container>
+    </>
   );
 };
 

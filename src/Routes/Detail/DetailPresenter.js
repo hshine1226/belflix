@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Loader from "../../Components/Loader";
+import { Helmet } from "react-helmet";
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -175,9 +176,17 @@ const DetailPresenter = ({ result, videos, error, loading }) => {
   };
 
   return loading ? (
-    <Loader />
+    <>
+      <Helmet>
+        <title>Loading | Beflix</title>
+      </Helmet>
+      <Loader />
+    </>
   ) : (
     <Container>
+      <Helmet>
+        <title>{result.title ? result.title : result.name} | Beflix</title>
+      </Helmet>
       <Backdrop
         bgImage={`https://image.tmdb.org/t/p/original${result.backdrop_path}`}
       ></Backdrop>
