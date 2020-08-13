@@ -77,7 +77,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "homepage": "https://hshine1226.github.io/belflix",
+  "homepage": "https://belflix.netlify.app/",
   "browserslist": {
     "production": [
       ">0.2%",
