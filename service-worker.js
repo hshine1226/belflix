@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/belflix/precache-manifest.98cf3b3d9011689ac106378e63397932.js"
+  "/belflix/precache-manifest.d2b518795c912f51860ddc81ee81990b.js"
 );
 
 self.addEventListener('message', (event) => {
